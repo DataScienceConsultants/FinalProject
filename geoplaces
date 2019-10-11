@@ -1,0 +1,37 @@
+#Google Maps
+# Dependencies
+import requests
+import json
+
+# Google developer API key
+from config import gkey
+
+# geocoordinates
+target_coordinates = "33.4152, -111.8315"
+target_search = "restaurant"
+target_radius = 8000
+target_type = "restaurant"
+
+# set up a parameters dictionary
+params = {
+    "location": target_coordinates,
+    "keyword": target_search,
+    "radius": target_radius,
+    "type": target_type,
+    "key": gkey
+}
+
+# base url
+base_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+
+# run a request using our params dictionary
+response = requests.get(base_url, params=params)
+
+# convert response to json
+places_data = response.json()
+
+# Print the json (pretty printed)
+print(json.dumps(places_data, indent=4, sort_keys=True))
+
+
+print(places_data)
